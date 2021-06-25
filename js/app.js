@@ -1,5 +1,6 @@
 /** VARIABLES */
 const btnEnviar = document.querySelector('#enviar');
+const btnReset = document.querySelector('#resetBtn');
 const formulario = document.querySelector('#enviar-mail');
 //Variables para campos
 const email = document.querySelector('#email');
@@ -16,7 +17,9 @@ function eventListeners(){
     asunto.addEventListener('blur',validarFormulario);
     mensaje.addEventListener('blur',validarFormulario);
     //Enviar mail
-    formulario.addEventListener('submit',enviarEmail);
+    btnEnviar.addEventListener('click',enviarEmail);
+    //Reinicia el form
+    btnReset.addEventListener('click',resetearFormulario);
 }
 
 
@@ -25,6 +28,13 @@ function iniciarApp(){
    btnEnviar.disable=true;
     //1° Deshabilito el boton de enviar
     btnEnviar.classList.add('cursor-not-allowed','opacity-50');
+    email.classList.remove('border','border-red-500');
+    email.classList.remove('border','border-green-500');
+    asunto.classList.remove('border','border-red-500');
+    asunto.classList.remove('border','border-green-500');
+    mensaje.classList.remove('border','border-red-500');
+    mensaje.classList.remove('border','border-green-500');
+
 }
 
 //Valida formulario
@@ -103,8 +113,14 @@ function enviarEmail(e){
         parrafo.classList.add('text-center','my-10','background-color-500', 'p-2', 'bg-green-500','text-white', 'font-bold', 'uppercase');
         setTimeout(()=>{
             parrafo.remove();
+            resetearFormulario();
         },3000);
 
     },4000);//Despues de 4 segundos
+}
+
+function resetearFormulario(){
+    formulario.reset();
+    iniciarApp();
 }
 

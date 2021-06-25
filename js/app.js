@@ -5,6 +5,8 @@ const formulario = document.querySelector('#enviar-mail');
 const email = document.querySelector('#email');
 const asunto = document.querySelector('#asunto');
 const mensaje = document.querySelector('#mensaje');
+//Regex validation for email
+const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 eventListeners();
 function eventListeners(){
     //Para arrancar la app
@@ -30,7 +32,7 @@ function validarFormulario(e){
     if(e.target.value.length>0){
         //Elimina los errores
         const error = document.querySelector('p.error');
-        if (error != null) {
+        if (error) {
             error.remove();
         }
         
@@ -42,11 +44,9 @@ function validarFormulario(e){
         e.target.classList.add('border','border-red-500');
         mostrarError('Todos los campos son obligatorios.');
     }
-
+    
     //Validate email
     if (e.target.type==='email') {
-        const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
         if( er.test( e.target.value) ){
             const error = document.querySelector('p.error');
             if (error != null) {
@@ -62,6 +62,13 @@ function validarFormulario(e){
             mostrarError('Email no valido.');
         }
     
+    }
+
+    if(er.test(email.value) && asunto.value !== '' && mensaje.value !== ''){
+        btnEnviar.disable=false;
+        btnEnviar.classList.remove('cursor-not-allowed','opacity-50');
+    }else{
+
     }
 }
 

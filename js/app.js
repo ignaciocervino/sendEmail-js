@@ -1,5 +1,6 @@
 /** VARIABLES */
 const btnEnviar = document.querySelector('#enviar');
+const formulario = document.querySelector('#enviar-mail');
 //Variables para campos
 const email = document.querySelector('#email');
 const asunto = document.querySelector('#asunto');
@@ -30,5 +31,17 @@ function validarFormulario(e){
     }
     else{
         e.target.classList.add('border','border-red-500');
+        mostrarError();
     }
+}
+
+function mostrarError(){
+    const mensajeError = document.createElement('p');
+    mensajeError.textContent = 'Todos los campos son obligatorios';
+    mensajeError.classList.add('border','border-red-500', 'background-color-100','text-red-500','p-3','mt-5','text-center','error');//Tailwind classes
+    const errores = document.querySelectorAll('.error');//Reviso si error existe previamente
+    if(errores.length ===0){//.length solo existe en querySelectorAll
+        formulario.appendChild(mensajeError);
+    }
+    
 }

@@ -1,4 +1,4 @@
-# sendEmail-js
+# sendEmail Form
 
 This code was developed for training reasons as part of the course 'JavaScript Moderno' on Udemy
 In this app I am emulating a form submit with the corresponding validations. I add the differents events in case the fields validate or not.

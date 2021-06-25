@@ -26,18 +26,26 @@ function iniciarApp(){
 //Valida formulario
 function validarFormulario(e){
 
+
     if(e.target.value.length>0){
         console.log('Si hay algo');
     }
     else{
         e.target.classList.add('border','border-red-500');
-        mostrarError();
+        mostrarError('Todos los campos son obligatorios.');
+    }
+
+    //Validate email
+    if (e.target.type==='email') {
+        if (e.target.value.indexOf('@') < 0) {
+            mostrarError('El email no es valido');
+        }
     }
 }
 
-function mostrarError(){
+function mostrarError(mensaje){
     const mensajeError = document.createElement('p');
-    mensajeError.textContent = 'Todos los campos son obligatorios';
+    mensajeError.textContent = mensaje;
     mensajeError.classList.add('border','border-red-500', 'background-color-100','text-red-500','p-3','mt-5','text-center','error');//Tailwind classes
     const errores = document.querySelectorAll('.error');//Reviso si error existe previamente
     if(errores.length ===0){//.length solo existe en querySelectorAll
